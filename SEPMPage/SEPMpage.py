@@ -7,12 +7,12 @@ from flask import request
 app = Flask(__name__)
 pagesize = '1000'
 
-api_url_base = "https://10.120.15.187:8446/sepm/api/v1/"
-authentication_url = "https://10.120.15.187:8446/sepm/api/v1/identity/authenticate"
+api_url_base = "https://SEPMServerHostnameorIP:8446/sepm/api/v1/"
+authentication_url = "https://SEPMServerHostnameorIP:8446/sepm/api/v1/identity/authenticate"
 # if output is required in JSON format
 json_format = True
 
-payload = {"username" : "admin", "password" : "Symantec123","domain" : ""}
+payload = {"username" : "SEPMAdministratorUserName", "password" : "SEPMAdministratorPassword","domain" : ""}
 headers = {"Content-Type":"application/json"}
 
 #requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL' # necessary
