@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block content %}
+<br/>
+<br/>
+
+<div class=page align="center">
+            <table class="centered thick-border">
+
+                    <th>SEP Client </th>
+                    <th>SEP Version </th>
+                    <th>Count</th>
+
+
+                {% for row in clientVersions['clientVersionList'] %}
+                    <tr>
+                        <td align="left" width="400px">{{row['formattedVersion']}}</td>
+                        <td align="left" width="200px">{{row['version']}}</td>
+                        <td align="right">{{row['clientsCount']}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+</div>
+{% endblock %}

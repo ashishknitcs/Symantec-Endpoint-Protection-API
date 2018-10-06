@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block content %}
+<br/>
+    <!--AD Logs is Login user Local Admin -->
+<div class=page>
+            <table >
+                        <th>Hostname </th>
+                        <th>IP Address</th>
+                        <th>Status</th>
+                        <th>last Heart Beat</th>
+                        <th>AV Signature</th>
+                        <th>Group</th>
+
+
+                {% for row in gupServerStatus %}
+                    <tr>
+                        <!--{% for c in row %}-->
+                            <!--<td>{{c}}</td>-->
+                        <!--{% endfor %}-->
+                        <td align="center" width="10%">{{row['computerName']}}</td>
+                        <td align="center">{{row['ipAddress']}}</td>
+                        <td align="center">{{row['status']}}</td>
+                        <td align="center">{{row['lastHeartBeat']}}</td>
+                        <td align="center">{{row['avas']}}</td>
+                        <td align="center">{{row['sepmgroup']}}</td>
+
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+</div>
+{% endblock %}

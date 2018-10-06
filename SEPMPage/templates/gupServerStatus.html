@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+{% block content %}
+<br/>
+
+<!--{{gupServerStatus}}-->
+    <!--AD Logs is Login user Local Admin -->
+<div class=page>
+            <table class="centered thick-border">
+
+                        <th>Hostname </th>
+                        <th>IP Address</th>
+                        <th>Status</th>
+                        <th>last Heart Beat(GMT)</th>
+                        <th>AV Signature</th>
+                        <th>Group</th>
+
+
+                {% for row in gupServerStatus %}
+                    <tr>
+                        <!--{% for c in row %}-->
+                            <!--<td>{{c}}</td>-->
+                        <!--{% endfor %}-->
+
+                        <td align="left" width="10%">{{row['computerName']}}</td>
+                        <td align="center">{{row['ipAddress']}}</td>
+                        <td align="center">
+                            {%if row['status'] == "Offline" %} <div style ="color:red">{{row['status']}}</div>
+                            {%else %} <div style ="color:green">{{row['status']}}</div>
+                            {% endif %}
+                        </td>
+                        <td align="center">{{row['lastHeartBeat']}}</td>
+                        <td align="center">{{row['avas']}}</td>
+                        <td align="left">{{row['sepmgroup']}}</td>
+
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+</div>
+{% endblock %}

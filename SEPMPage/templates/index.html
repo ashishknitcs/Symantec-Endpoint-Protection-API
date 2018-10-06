@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SEP Page</title>
+    <meta http-equiv="refresh" content="300">
+</head>
+
+<style>
+    .thick-border {
+        border: 3px solid green;
+        border-collapse: collapse;}
+
+    body            { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+a, h1, h2       { color: #377ba8; }
+h1, h2          { margin: 0; }
+h1              { border-bottom: 2px solid #eee; }
+h2              { font-size: 1.2em; }
+
+table .dataframe, .dataframe th, .dataframe td {
+  border: none;
+  border-bottom: 1px solid #C8C8C8;
+  border-collapse: collapse;
+  text-align:left;
+  padding: 10px;
+  margin-bottom: 40px;
+  font-size: 0.9em;
+}
+
+.issuemachines th {
+    background-color: #77dd77;
+    color: white;
+}
+
+tr:nth-child(odd)	{ background-color:#eee; }
+tr:nth-child(even)	{ background-color:#fff; }
+
+tr:hover            { background-color: #ffff99;}
+
+</style>
+
+<style>
+body {font-family: "Lucida Sans Unicode", sans-serif;}
+
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 20%;
+}
+
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Style the tab content */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 50px;
+    text-align: center;
+}
+
+#Home {background-color:#5D6D7E;}
+#Summary {background-color:#5D6D7E;}
+#DailyDrillDown {background-color:#5D6D7E;}
+#AdminLogins {background-color:#5D6D7E;}
+#Search {background-color:#5D6D7E;}
+
+    div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loadingimage.gif) no-repeat;
+    cursor: wait;
+    }
+</style>
+
+<script>
+function openCity(cityName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(cityName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();
+        }
+// ]]></script>
+
+</head>
+
+
+    <body>
+
+        <div id="Home" class="tabcontent">
+          <h3>Home</h3>
+          <p>Analyse login details captured in logs to report CMS and SEP status.</p>
+        </div>
+
+        <div id="gupServerStatus" class="tabcontent">
+          <h3>GUP Servers </h3>
+          <p>GUP Servers</p>
+        </div>
+
+        <div id="clientVersions" class="tabcontent">
+          <h3>Client Versions</h3>
+          <p>Details of different SEP client versions</p>
+        </div>
+
+        <div id="clientDefStatus" class="tabcontent">
+          <h3>Client Definition Status</h3>
+          <p>List clients count with definition </p>
+        </div>
+
+        <div id="Search" class="tabcontent">
+          <h3>Search</h3>
+          <p>Search Users, Computers, IP Addresses in AD logs</p>
+        </div>
+
+        <a href="#"><button class="tablink" onclick="openCity('Home', this, 'red')" id="defaultOpen">Home</button></a>
+        <a href="/gupServerStatus"><button class="tablink" onclick="openCity('gupServerStatus', this, 'green');loading();"> GUP Servers</button></a>
+        <a href="/clientVersions"><button class="tablink" onclick="openCity('clientVersions', this, 'blue');loading();">SEP Versions</button></a>
+        <a href="/clientDefStatus"><button class="tablink" onclick="openCity('clientDefStatus', this, 'orange');loading();">Client Def Status</button></a>
+        <a href="/search"><button class="tablink" onclick="openCity('Search', this, 'yellow');loading();">Search</button></a>
+        <br/>
+
+        <div id="content">{% block content %}{% endblock %}</div>
+
+
+    </body>
+</html>

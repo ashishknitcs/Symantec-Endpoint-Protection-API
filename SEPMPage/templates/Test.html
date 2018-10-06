@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Mr.JsonTable</title>
+		<link href="/Content/css?v=_dul2GFKtzv-vkh3AwT2_gXob_ULY7Q767QZTyf9eC81" rel="stylesheet"/>
+
+
+		<script src="/bundles/modernizr?v=qVODBytEBVVePTNtSFXgRX0NCEjh9U_Oj8ePaSiRcGg1"></script>
+
+		<script src="/bundles/jquery?v=JzhfglzUfmVF2qo-weTo-kvXJ9AJvIRBLmu11PgpbVY1"></script>
+
+
+		<meta name="author" content="Adrian McGrath - adrian@matchingradar.co.uk" />
+		<meta name="description" content="Mr.JsonTable is a very simple, very small jquery plugin that displays a HTML Table from JSON data with paging sorting and hideable columns" />
+		<meta name="keywords" content="JSON to HTML table, JSON, HTML, jQuery, Matching radar, Web development" />
+
+		<script src="/mrjsontable/scripts/mrjsontable.js"></script>
+		<link href="/mrjsontable/css/mrjsontable.css" rel="stylesheet" />
+
+		<script src="syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+		<script src="syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+
+		<link href="syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" />
+		<link href="syntaxhighlighter_3.0.83/styles/shCoreDefault.css" rel="stylesheet" />
+		<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<script>
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-47564413-1', 'azurewebsites.net');
+			ga('send', 'pageview');
+		</script>
+
+	</head>
+	<body>
+    <h1>MR.JsonTable</h1>
+    <h2>(A very simple, very small jquery plugin: HTML Table from JSON data with paging sorting and hideable columns)</h2>
+
+    <a href="https://github.com/MatchingRadar/Mr.JsonTable">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+    </a>
+
+
+    
+<p>This is my very first jquery plugin so be gentle!</p>
+
+<p>My requirments</p>
+
+<ul>
+    <li>Table will show a basic json data object (no nested objects)</li>
+    <li>Able to pass information about what columns to show and what data type the data is</li>
+    <li>Ability to sort the colums of four data types:
+                <ul>
+                    <li>string</li>
+                    <li>int</li>
+                    <li>float</li>
+                    <li>datetime (must be able to parse to javascript date object)</li>
+                </ul>
+    </li>
+    <li>Ability to have more than one table on the page</li>
+    <li>Ability to have sortable and unsortable colums</li>
+    <li>Ability to show and hide columns</li>
+    <li>Ability to load a column as hidden</li>
+    <li>Minimal css and images</li>
+    <li>Be as small in filesize as I can make it whilst still being readable (the unminified version at least)</li>
+    <li>Ability to page</li>
+    <li>Ability to set a page size</li>
+</ul>
+
+<h2>So here it is at a whopping minified 2.80KB! :D</h2>
+<div class="mrjsontable"></div>
+
+<script>
+    $(function () {
+        $(".mrjsontable").mrjsontable({
+            tableClass: "my-table",
+            pageSize: 9,
+            columns: [
+                new $.fn.mrjsontablecolumn({
+                    heading: "Name",
+                    data: "name"
+                }),
+                {
+                    heading: "Age",
+                    data: "age",
+                    type: "int",
+                    sortable: true
+                },
+                new $.fn.mrjsontablecolumn({
+                    heading: "Height",
+                    data: "height",
+                    type: "float",
+                    sortable: true,
+                    starthidden: true
+                }),
+                new $.fn.mrjsontablecolumn({
+                    heading: "Weight",
+                    data: "weight",
+                    type: "int",
+                    sortable: false,
+                }),
+                new $.fn.mrjsontablecolumn({
+                    heading: "DOB",
+                    data: "dob",
+                    type: "datetime"
+                })
+            ],
+            data: [
+                { name: "Bob", age: 14, height: 14.2, weight: 84, dob: "1984-04-17T14:48:00" },
+                { name: "Bill", age: 24, height: 16.6, weight: 96, dob: "Mon, 16 April 1984 14:48:00 GMT" },
+                { name: "Barry", age: 18, height: 12.9, weight: 73, dob: "April 15, 1984" },
+                { name: "Barney", age: 56, height: 14.2, weight: 84, dob: "1984-04-14T14:48:00" },
+                { name: "Bart", age: 3, height: 16.6, weight: 96, dob: "Mon, 13 April 1984 14:48:00 GMT" },
+                { name: "Bartholomew", age: 54, height: 12.9, weight: 73, dob: "April 12, 1984" },
+                { name: "Ben", age: 52, height: 14.2, weight: 84, dob: "1984-04-11T14:48:00" },
+                { name: "Benedict", age: 78, height: 16.6, weight: 96, dob: "Mon, 10 April 1984 14:48:00 GMT" },
+                { name: "Benjamin", age: 67, height: 12.9, weight: 73, dob: "April 9, 1984" },
+                { name: "Bernard", age: 34, height: 14.2, weight: 84, dob: "1984-04-08T14:48:00" },
+                { name: "Blake", age: 54, height: 16.6, weight: 96, dob: "Mon, 7 April 1984 14:48:00 GMT" },
+                { name: "Boris", age: 66, height: 12.9, weight: 73, dob: "April 6, 1984" },
+                { name: "Brad", age: 88, height: 14.2, weight: 84, dob: "1984-04-05T14:48:00" },
+                { name: "Braden", age: 90, height: 16.6, weight: 96, dob: "Mon, 4 April 1984 14:48:00 GMT" },
+                { name: "Bradley", age: 103, height: 12.9, weight: 73, dob: "April 3, 1984" },
+                { name: "Brody", age: 16, height: 14.2, weight: 84, dob: "1984-04-02T14:48:00" }
+            ]
+        });
+    });
+</script>
+
+<div class="code">
+    <h3>View code for this example</h3>
+    <div class="the-code" style="display: none;">
+        <pre class="brush: js;">
+        &lt;div class="mrjsontable">&lt;/div>
+        &lt;script>
+            $(function () {
+                $(".mrjsontable").mrjsontable({
+                    tableClass: "my-table",
+                    pageSize: 9,
+                    columns: [
+                        new $.fn.mrjsontablecolumn({
+                            heading: "Name",
+                            data: "name"
+                        }),
+                        {
+                            heading: "Age",
+                            data: "age",
+                            type: "int",
+                            sortable: true
+                        },
+                        new $.fn.mrjsontablecolumn({
+                            heading: "Height",
+                            data: "height",
+                            type: "float",
+                            sortable: true,
+                            starthidden: true
+                        }),
+                        new $.fn.mrjsontablecolumn({
+                            heading: "Weight",
+                            data: "weight",
+                            type: "int",
+                            sortable: false,
+                        }),
+                        new $.fn.mrjsontablecolumn({
+                            heading: "DOB",
+                            data: "dob",
+                            type: "datetime"
+                        })
+                    ],
+                    data: [
+                        { name: "Bob", age: 14, height: 14.2, weight: 84, dob: "1984-04-17T14:48:00" },
+                        { name: "Bill", age: 24, height: 16.6, weight: 96, dob: "Mon, 16 April 1984 14:48:00 GMT" },
+                        { name: "Barry", age: 18, height: 12.9, weight: 73, dob: "April 15, 1984" },
+                        { name: "Barney", age: 56, height: 14.2, weight: 84, dob: "1984-04-14T14:48:00" },
+                        { name: "Bart", age: 3, height: 16.6, weight: 96, dob: "Mon, 13 April 1984 14:48:00 GMT" },
+                        { name: "Bartholomew", age: 54, height: 12.9, weight: 73, dob: "April 12, 1984" },
+                        { name: "Ben", age: 52, height: 14.2, weight: 84, dob: "1984-04-11T14:48:00" },
+                        { name: "Benedict", age: 78, height: 16.6, weight: 96, dob: "Mon, 10 April 1984 14:48:00 GMT" },
+                        { name: "Benjamin", age: 67, height: 12.9, weight: 73, dob: "April 9, 1984" },
+                        { name: "Bernard", age: 34, height: 14.2, weight: 84, dob: "1984-04-08T14:48:00" },
+                        { name: "Blake", age: 54, height: 16.6, weight: 96, dob: "Mon, 7 April 1984 14:48:00 GMT" },
+                        { name: "Boris", age: 66, height: 12.9, weight: 73, dob: "April 6, 1984" },
+                        { name: "Brad", age: 88, height: 14.2, weight: 84, dob: "1984-04-05T14:48:00" },
+                        { name: "Braden", age: 90, height: 16.6, weight: 96, dob: "Mon, 4 April 1984 14:48:00 GMT" },
+                        { name: "Bradley", age: 103, height: 12.9, weight: 73, dob: "April 3, 1984" },
+                        { name: "Brody", age: 16, height: 14.2, weight: 84, dob: "1984-04-02T14:48:00" }
+                    ]
+                });
+            });
+        &lt;/script>
+                </pre>
+    </div>
+</div>
+
+
+<h2>Instructions</h2>
+
+<ol>
+    <li>This plug in requires jQuery. You can download <a href="http://jquery.com/" target="_parent">jquery from here.</a></li>
+    <li>Download the <a href="/mrjsontable.zip">mrjsontable files here.</a></li>
+    <li>Place the files in the root of you website.</li>
+    <li>Add links to the css and javascript files in the head section of your html page
+                <pre class="brush: js;">
+        &lt;script src="/mrjsontable/scripts/mrjsontable.js">&lt;/script>
+        &lt;link href="/mrjsontable/css/mrjsontable.css" rel="stylesheet" />
+        </pre>
+    </li>
+    <li>Make a div in your HTML where you would like the table to appear and give it a class or ID so you can reference it later eg:
+                <pre class="brush: js;">
+        &lt;div id="mydiv">&lt;/div>
+        </pre>
+    </li>
+    <li>Initiate the mrjsontable object passing in the array of json data that you want to display and providing information on the columns
+
+                <div class="note">
+                    <p>Information on columns can be passed using a standard json object or a $.fn.mrjsontablecolumn({}); object. both version are used below</p>
+                </div>
+
+        <pre class="brush: js;">
+        &lt;div id="mydiv">&lt;/div>
+        &lt;script>
+            $(function () {
+                $("#mydiv").mrjsontable({
+                    columns: [
+                        {
+                            heading: "Can be any text for the heading of this column",
+                            data: "json_data_field_name", // see how this links to the json object further down
+                            type: "string", // can be string, int, float, datetime
+                            sortable: true, // is the field sortable (optional defaults to false)
+                            starthidden: true // should the field be hidden when loaded (optional defaults to false)
+                        },
+                        new $.fn.mrjsontablecolumn({
+                            heading: "Name",
+                            data: "name"
+                        }),
+                        {
+                            heading: "Another heading",
+                            // etc...
+                        }
+                    ],
+                    data: [
+                        {
+                            yourdata: yourvalue,
+                            json_data_field_name: value //in this example the first column is looking for this field specified in the data property,
+                            name: name_value // in this example the second column is looking for this value
+                        },
+                        {
+                            yourdata: yourvalue,
+                            // etc...
+                        }
+                    ]
+                });
+            });
+        &lt;/script>
+        </pre>
+    </li>
+    <li>That's it, enjoy using Mr.JsonTable!</li>
+</ol>
+
+<p>As always, if you have any questions or queries then feel free to ask someone else first :D</p>
+
+<h3>Big thanks</h3>
+
+<p>A big thanks to <a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/installation.html">SyntaxHighlighter 3.0.83</a> for making my code look pretty</p>
+
+<h3>Donate or follow</h3>
+
+<p>If you feel the urge to buy me a beer or follow me on twitter here are some buttons!</p>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="JNMWFGG73CK4J">
+    <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+<a href="https://twitter.com/Matching_Radar" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @Matching_Radar</a>
+<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+
+
+
+    <footer>
+        <p>This site is in no way affiliated with <a href="http://www.matchingradar.co.uk">Matching Radar</a></p>
+    </footer>
+    
+    <script>
+        $(function () {
+            $('.code h3').click(function () {
+                $('.the-code').slideToggle();
+            });
+        });
+    </script>
+
+</body>
+</html>
